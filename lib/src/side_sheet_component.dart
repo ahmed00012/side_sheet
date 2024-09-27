@@ -13,6 +13,8 @@ class SideSheet {
 
       /// Use this to set the width of the side sheet
       double? width,
+      double? height,
+      Alignment? alignment,
       String barrierLabel = "Side Sheet",
 
       /// Use barrierDismissible to dismiss the side sheet by tapping outside of it
@@ -33,6 +35,8 @@ class SideSheet {
     dynamic data = await _showSheetSide(
       body: body,
       width: width,
+      height: height,
+      alignment: alignment,
       rightSide: false,
       context: context,
       barrierLabel: barrierLabel,
@@ -59,6 +63,8 @@ class SideSheet {
 
       /// Use this to set the width of the side sheet
       double? width,
+        Alignment? alignment,
+        double? height,
       String barrierLabel = "Side Sheet",
 
       /// Use barrierDismissible to dismiss the side sheet by tapping outside of it
@@ -87,6 +93,8 @@ class SideSheet {
       sheetBorderRadius: sheetBorderRadius,
       sheetColor: sheetColor,
       transitionDuration: transitionDuration,
+      alignment: alignment,
+      height: height
     );
     if (data == null) return '';
 
@@ -97,6 +105,8 @@ class SideSheet {
     required Widget body,
     required bool rightSide,
     double? width,
+    double? height,
+    Alignment? alignment,
     required BuildContext context,
     required String barrierLabel,
     required bool barrierDismissible,
@@ -121,15 +131,15 @@ class SideSheet {
       context: context,
       pageBuilder: (context, animation1, animation2) {
         return Align(
-          alignment: (rightSide ? Alignment.centerRight : Alignment.centerLeft),
+          alignment: alignment ?? (rightSide ? Alignment.centerRight : Alignment.centerLeft),
           child: Material(
-            elevation: 15,
+            elevation: 0,
             color: Colors.transparent,
             borderRadius: borderRadius,
             child: Container(
                 decoration: BoxDecoration(
                     color: sheetColor, borderRadius: borderRadius),
-                height: double.infinity,
+                height: height ?? double.infinity,
                 width: width ?? MediaQuery.of(context).size.width / 1.4,
                 child: body),
           ),
